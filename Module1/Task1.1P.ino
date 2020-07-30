@@ -5,17 +5,21 @@ void setup() {
   pinMode(buzzer, OUTPUT);
   pinMode(sensor, INPUT);    // initialize sensor as an input
   Serial.begin(9600);        // initialize serial
-  attachInterrupt(digitalPinToInterrupt(sensor), motion, RISING); //Fires motion when sensor rises from 0 to 1
 }
 
 void loop(){
+  
+  if(sensor==HIGH) {
+    Serial.println("Motion detected!");
+    digitalWrite(buzzer, HIGH);
+    noTone(buzzer);     // Stop sound...
+    Serial.println("Buzzed!");
+  }
+  else {
+    
+  }
+  
   delay(200);
-}
-
-void motion(){
-  Serial.println("Motion detected!");
-  digitalWrite(buzzer, HIGH);
-  noTone(buzzer);     // Stop sound...
-  Serial.println("Buzzed!");
 
 }
+
