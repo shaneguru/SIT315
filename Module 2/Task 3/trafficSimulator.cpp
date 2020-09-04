@@ -64,7 +64,6 @@ return 0;
 
 void* produce(void* args)
 {
-    
     while (ccount < m)
     {
         unique_lock<mutex> lk(mutex1); //locking until producer finishes processing 
@@ -73,7 +72,6 @@ void* produce(void* args)
         {
             tr_sig_queue.push(tr_signal{in[ccount], tstamp[ccount], tr_light[ccount], no_cars[ccount]}); //push into queue
             consumer_cv.notify_all(); //notifying consumer threads
-        
             ccount++;
         }
 
@@ -82,17 +80,12 @@ void* produce(void* args)
             producer_cv.wait(lk, []{ return ccount < m; }); //if count is greater than the number of rows in the data set wait
         }
 
-
-        
         lk.unlock(); //unlock after processing
-
         sleep(rand()%3);
     }
 }
 
 void* consume(void* args){
-    
-
     while(con_count< m)
     {
         unique_lock<mutex> lk(mutex1); //lock until processing
@@ -115,11 +108,9 @@ void* consume(void* args){
             }
             else{}
 
-
             tr_sig_queue.pop(); //pop the data
             producer_cv.notify_all(); //notify producer
             con_count++;
-
         }
         else
         { 
@@ -138,8 +129,6 @@ void* consume(void* args){
         }
         
         lk.unlock();
-
-        
         sleep(rand()%3);
     }
 }
@@ -161,7 +150,6 @@ void get_traff_data(){
 
         while (!infile.eof()) 
 		{
-			
 			getline(infile, ind, ',');
             		in.push_back(stoi(ind));
 			getline(infile, t_stamp, ',');
@@ -174,7 +162,6 @@ void get_traff_data(){
 			m += 1; 
 		}
 		infile.close();
-		
 	}
 	else printf("Could not open file, try again.");
 }
