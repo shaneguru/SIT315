@@ -1,5 +1,5 @@
-                         MPI Implementation – Module 3 Task 1
-                         -------------------------------------
+MPI Implementation – Module 3 Task 1
+-------------------------------------
 
 |                 |      Size       |    Processes    |     Threads     | Execution time (s) |
 | --------------- | --------------- | --------------- | --------------- | ------------------ |
